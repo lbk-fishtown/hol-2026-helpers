@@ -13,9 +13,6 @@ FALLBACK_GROUP = "Other"  # any file not listed above lands here
 
 def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": "hol-2026-helpers-build"})
-    tok = os.environ.get("GITHUB_TOKEN")
-    if tok and "api.github.com" in url:
-        req.add_header("Authorization", f"Bearer {tok}")
     with urllib.request.urlopen(req, timeout=30) as r:
         return r.read().decode()
 
