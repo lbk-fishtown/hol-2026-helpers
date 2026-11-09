@@ -2,7 +2,7 @@ name: Refresh snippets
 
 on:
   schedule:
-    - cron: "0 */2 * * *"  # every 2 hours, on the hour (UTC)
+    - cron: "0 1,3,5,7,9,19,21,23 * * *"  # every 2h, 6am-8pm Melbourne time (AEDT, UTC+11); cron is UTC
   workflow_dispatch:       # manual "Run workflow" button
 
 permissions:
