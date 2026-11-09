@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOL 2026 Snippets</title>
+<style>
+:root{--bg:#f7f8fa;--panel:#fff;--text:#1b1f27;--muted:#657084;--border:#dde1e8;--accent:#2563eb;--accent-text:#fff;--code-bg:#0f172a;--code-text:#e2e8f0;--ok:#16a34a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1117;--panel:#151b23;--text:#e6e9ef;--muted:#8b95a7;--border:#2a3340;--accent:#4f8cff;--accent-text:#fff;--code-bg:#0a0e14;--code-text:#dbe3ef}}
+:root[data-theme="dark"]{--bg:#0d1117;--panel:#151b23;--text:#e6e9ef;--muted:#8b95a7;--border:#2a3340;--accent:#4f8cff;--accent-text:#fff;--code-bg:#0a0e14;--code-text:#dbe3ef}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:10;background:var(--panel);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header h1{font-size:17px;margin:0;margin-right:auto}
+header h1 small{font-weight:400;color:var(--muted);margin-left:8px}
+input[type=search]{padding:7px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font:inherit;min-width:200px}
+button,.btn{font:inherit;font-size:13px;padding:6px 12px;border-radius:6px;border:1px solid var(--border);background:var(--panel);color:var(--text);cursor:pointer;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);color:var(--accent-text);border-color:var(--accent)}
+button.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;max-width:1200px;margin:0 auto;padding:20px 16px 60px}
+nav{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;font-size:14px}
+nav h2{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:16px 0 4px}
+nav h2:first-child{margin-top:0}
+nav a{display:block;padding:3px 8px;border-radius:5px;color:var(--text);text-decoration:none;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+nav a:hover,nav a.active{background:var(--panel);color:var(--accent)}
+section.group>h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:28px 0 10px}
+section.group:first-child>h2{margin-top:0}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden}
+.card-head{display:flex;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.card-head h3{margin:0 auto 0 0;font:600 14px ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.card-head .meta{color:var(--muted);font-size:12px}
+pre{margin:0;padding:14px;background:var(--code-bg);color:var(--code-text);overflow:auto;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;tab-size:4}
+.hidden{display:none}
+.empty{color:var(--muted);padding:20px 0}
+mark{background:#fde047;color:#000;border-radius:2px}
+@media (max-width:760px){.layout{grid-template-columns:1fr}nav{display:none}input[type=search]{min-width:0;flex:1 1 100%}}
+pre code.hljs{padding:0;background:transparent}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+<header>
+  <h1>HOL 2026 Snippets <small id="count"></small></h1>
+  <input type="search" id="q" placeholder="Filter by filename or content…" aria-label="Filter snippets">
+  <button id="theme" aria-label="Toggle theme">Theme</button>
+</header>
+<div class="layout">
+  <nav id="nav" aria-label="Snippets"></nav>
+  <main id="main"></main>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+const DATA=[{"group": "Project setup", "files": [{"name": "dbt_project.yml", "url": "https://gist.github.com/paulandrewfield/a1f642a296a4d17901a7c6cf71a46bb3", "content": "\n# Name your project! Project names should contain only lowercase characters\n# and underscores. A good package name should reflect your organization's\n# name or the intended use of these models\nname: 'foundational_project'\nversion: '1.0.0'\nconfig-version: 2\n\n# This setting configures which \"profile\" dbt uses for this project.\nprofile: 'default'\n\n# These configurations specify where dbt should look for different types of files.\n# The `source-paths` config, for example, states that models in this project can be\n# found in the \"models/\" directory. You probably won't need to change these!\nmodel-paths: [\"models\"]\nanalysis-paths: [\"analysis\"]\ntest-paths: [\"tests\"]\nseed-paths: [\"seeds\"]\nmacro-paths: [\"macros\"]\nsnapshot-paths: [\"snapshots\"]\n\ntarget-path: \"target\"  # directory which will store compiled SQL files\nclean-targets:         # directories to be removed by `dbt clean`\n    - \"target\"\n    - \"dbt_modules\"\n\ninfo_schema: \n  version: 1\n\n\n# Configuring models\n# Full documentation: https://docs.getdbt.com/docs/configuring-models\n\n# In this example config, we tell dbt to build all models in the jaffle_shop project\n# as tables. These settings can be overridden in the individual model files\n# using the `{{ config(...) }}` macro.\n\nmodels:\n  foundational_project:\n    +static_analysis: strict\n    +materialized: view\n    +access: public\n"}, {"name": "sources.yml", "url": "https://gist.github.com/paulandrewfield/a3ef51f4c0978087717c31eae2f95a7a", "content": "sources:\n  - name: tpch\n    description: \"TPCH data source from Snowflake Sample Data\"\n    database: snowflake_sample_data\n    schema: tpch_sf1\n    tables:\n      - name: orders\n        description: \"One record per order\"\n      - name: customer\n        description: \"One record per customer\"\n      - name: lineitem\n        description: \"One record per line item within a single order (1 -> n)\"\n      - name: nation \n      - name: part \n      - name: partsupp \n      - name: region \n      - name: supplier\n      \n"}]}, {"group": "Staging models", "files": [{"name": "stg_nations.sql", "url": "https://gist.github.com/paulandrewfield/838a161ca40387e164819eb84fe8a867", "content": "with\n\nsource as (\n\n   select * from {{ source('tpch', 'nation') }}\n\n),\n\nrenamed as (\n\n   select\n       n_nationkey as nation_key,\n       n_name as nation,\n       n_regionkey as region_key,\n       n_comment as nation_comment\n\n   from source\n\n)\n\nselect * from renamed"}, {"name": "stg_regions.sql", "url": "https://gist.github.com/paulandrewfield/273583ee724ca4b5e006fd550ad7c75d", "content": "with\n\nsource as (\n\n   select * from {{ source('tpch', 'region') }}\n\n),\n\nrenamed as (\n\n   select\n       r_regionkey as region_key,\n       r_name as region,\n       r_comment as region_comment\n\n   from source\n\n)\n\nselect * from renamed"}]}, {"group": "Marts", "files": [{"name": "dim_customers.sql", "url": "https://gist.github.com/paulandrewfield/668b11738bc83eab35503c85b3623755", "content": "with\n    customer as (select * from {{ ref(\"stg_customers\") }}),\n\n    nation as (select * from {{ ref(\"stg_nations\") }}),\n\n    region as (select * from {{ ref(\"stg_regions\") }})\n\nselect\n    customer.customer_key,\n    customer.name,\n    customer.address,\n    nation,\n    region,\n    customer.phone_number,\n    customer.account_balance,\n    customer.market_segment\nfrom customer\ninner join nation on customer.nation_key = nation.notion_key\ninner join region on nation.region_key = region.region_key"}, {"name": "monthly_sales.sql", "url": "https://gist.github.com/paulandrewfield/d7a532d26e5a4df44fc66497d325975d", "content": "SELECT\n   DATE_TRUNC('month', order_date) AS order_month,\n   market_segment,\n   SUM(gross_item_sales_amount) AS total_revenue\nFROM\n   {{ ref('fct_orders') }}\nGROUP BY\n   1, 2\nORDER BY\n   1, 2\n"}, {"name": "monthly_sales.yml", "url": "https://gist.github.com/paulandrewfield/e59d2fac190918dd7b39fb05e5537459", "content": "models:\n- name: monthly_sales\n  description: This model aggregates sales data on a monthly basis, providing insights\n    into total revenue generated per market segment each month.\n  columns:\n  - name: order_month\n    description: The month in which the order was placed.\n    data_tests:\n      - not_null\n  - name: market_segment\n    description: The market segment to which the sale belongs.\n    data_tests:\n      - not_null\n  - name: total_revenue\n    description: The total revenue generated from sales in the specified month and\n      market segment.\n    data_tests:\n      - not_null"}]}, {"group": "Tests", "files": [{"name": "assert_net_item_sales_amount_positive.sql", "url": "https://gist.github.com/paulandrewfield/88713369e6c99fb06d12ab55c0857cb8", "content": "select\n   order_key,\n   sum(net_item_sales_amount) as amount\nfrom {{ ref('fct_orders') }}\ngroup by 1\nhaving not(amount >= 0)"}, {"name": "all_models_have_descriptions.sql", "url": "https://gist.github.com/paulandrewfield/67e97a1c9fe360ad166385467a7fa913", "content": "select unique_id\nfrom {{ info_schema('models') }}\nwhere description = ''"}]}, {"group": "Other", "files": [{"name": "customer_tier.sql", "url": "https://gist.github.com/paulandrewfield/51323b6b26b73505552656b68dbe333c", "content": "/* customer_tier // dmitri k // 2021/03/22 // #DA-417\n   WIP - thresholds are guesses, confirm w/ finance\n   pg port: same alias-ref issue as customer_flags, the tier CASE keyed off\n            the lifetime_value alias in the same select. aggregate moved out\n            one level so the outer select can see it.\n\n   !! READ BEFORE EDITING !!\n   the ladder is ORDER DEPENDENT. tier1 is first and it swallows everything\n   <= 200000, which means the tier4 arm never sees anything below that even\n   though its range says 0. that is the existing behaviour, reporting has\n   been reconciling against it for two years, and if you sort the arms into\n   a \"sensible\" order you will silently re-tier about a third of the book.\n   two more things that look like bugs and are not (yet):\n     - 1999999 -> 2000000 falls through every arm and comes out NULL\n     - 999999  -> 1000000 same\n   -- dk, then re-flagged 2023-06-04 a.ferreira, still not fixed\n   TODO: tier2/tier3 ranges overlap weird, the calcualtion needs review\n*/\ncreate or replace procedure retail_datamart.build_customer_tier()\nlanguage plpgsql\nset search_path = retail_datamart, public\nas\n$$\ndeclare\n  v_null_tier bigint;\nbegin\n  drop table if exists retail_datamart.customer_tier;\n  create table retail_datamart.customer_tier (customer_key numeric(38,0), lifetime_value numeric(38,2), tier_name varchar);\n\n  insert into retail_datamart.customer_tier (customer_key, lifetime_value, tier_name)\n  select t.ck, t.ltv,\n         case when t.ltv <= 200000 then 'tier1' when t.ltv > 2000000 then 'tier2' when t.ltv between 1000000 and 1999999 then 'tier3' when t.ltv between 0 and 999999 then 'tier4' end\n    from (select cust.customer_key ck, sum(ord.total_price) ltv\n            from stg_tpch_customers cust\n                 inner join stg_tpch_orders ord on cust.customer_key = ord.customer_key\n           group by cust.customer_key) t;\n\n  -- the NULL bucket from the header. counted, not fixed.\n  select count(*) into v_null_tier from retail_datamart.customer_tier where tier_name is null;\n  if v_null_tier > 0 then\n    raise notice 'customer_tier: % customers landed between bands (expected, see header)', v_null_tier;\n  end if;\n\n  raise notice 'customer_tier built';\nend;\n$$;\n"}]}];
+const $=(t,p={},...k)=>{const e=document.createElement(t);for(const[a,v]of Object.entries(p))a in e&&a!=='style'?e[a]=v:e.setAttribute(a,v);e.append(...k);return e};
+const id=n=>'f-'+n.replace(/[^a-z0-9]+/gi,'-');
+const nav=document.getElementById('nav'),main=document.getElementById('main');
+async function copy(text,btn,label){
+  try{await navigator.clipboard.writeText(text)}catch{
+    const t=$('textarea',{value:text});document.body.append(t);t.select();document.execCommand('copy');t.remove()}
+  const o=label;btn.textContent='Copied ✓';btn.classList.add('done');
+  setTimeout(()=>{btn.textContent=o;btn.classList.remove('done')},1500)}
+const cards=[];
+DATA.forEach(g=>{
+  const sec=$('section',{className:'group'},$('h2',{},g.group));
+  nav.append($('h2',{},g.group));
+  g.files.forEach(f=>{
+    const lines=f.content.replace(/\n$/,'').split('\n').length;
+    const code=$('code',{className:'language-'+(f.name.endsWith('.yml')?'yaml':'sql')},f.content);
+    const btn=$('button',{className:'primary'},'Copy');
+    btn.onclick=()=>copy(f.content,btn,'Copy');
+    const card=$('article',{className:'card',id:id(f.name)},
+      $('div',{className:'card-head'},$('h3',{},f.name),$('span',{className:'meta'},lines+' lines'),
+        $('a',{className:'btn',href:f.url,target:'_blank',rel:'noopener'},'Gist ↗'),btn),
+      $('pre',{tabIndex:0},code));
+    sec.append(card);
+    const link=$('a',{href:'#'+id(f.name)},f.name);nav.append(link);
+    cards.push({f,card,link,sec})});
+  main.append(sec)});
+const empty=$('p',{className:'empty hidden'},'No snippets match your filter.');main.append(empty);
+const count=document.getElementById('count');
+function filter(){
+  const q=document.getElementById('q').value.trim().toLowerCase();let n=0;
+  cards.forEach(c=>{const m=!q||c.f.name.toLowerCase().includes(q)||c.f.content.toLowerCase().includes(q);
+    c.card.classList.toggle('hidden',!m);c.link.classList.toggle('hidden',!m);if(m)n++});
+  document.querySelectorAll('section.group').forEach(s=>s.classList.toggle('hidden',!s.querySelector('.card:not(.hidden)')));
+  empty.classList.toggle('hidden',n>0);
+  count.textContent=n+' of '+cards.length+' files'}
+document.getElementById('q').oninput=filter;filter();
+if(window.hljs)document.querySelectorAll('pre code').forEach(el=>hljs.highlightElement(el));
+const th=document.getElementById('theme');
+th.onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cards.forEach(c=>c.link.classList.toggle('active',c.card===e.target))}}),{rootMargin:'-80px 0px -70% 0px'});
+cards.forEach(c=>io.observe(c.card));
+</script>
+</body>
+</html>
