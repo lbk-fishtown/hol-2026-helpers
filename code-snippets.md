@@ -26,8 +26,6 @@ Copy-and-paste snippets for the hands-on lab, collected from the gists in one pl
 
 ### <a id="dbt-project-yml"></a>`dbt_project.yml`
 
-[View gist](https://gist.github.com/paulandrewfield/a1f642a296a4d17901a7c6cf71a46bb3)
-
 ```yaml
 
 # Name your project! Project names should contain only lowercase characters
@@ -75,8 +73,6 @@ models:
 
 ### <a id="sources-yml"></a>`sources.yml`
 
-[View gist](https://gist.github.com/paulandrewfield/a3ef51f4c0978087717c31eae2f95a7a)
-
 ```yaml
 sources:
   - name: tpch
@@ -104,8 +100,6 @@ sources:
 
 ### <a id="stg-nations-sql"></a>`stg_nations.sql`
 
-[View gist](https://gist.github.com/paulandrewfield/838a161ca40387e164819eb84fe8a867)
-
 ```sql
 with
 
@@ -131,8 +125,6 @@ select * from renamed
 ```
 
 ### <a id="stg-regions-sql"></a>`stg_regions.sql`
-
-[View gist](https://gist.github.com/paulandrewfield/273583ee724ca4b5e006fd550ad7c75d)
 
 ```sql
 with
@@ -163,8 +155,6 @@ select * from renamed
 
 ### <a id="dim-customers-sql"></a>`dim_customers.sql`
 
-[View gist](https://gist.github.com/paulandrewfield/668b11738bc83eab35503c85b3623755)
-
 ```sql
 with
     customer as (select * from {{ ref("stg_customers") }}),
@@ -189,8 +179,6 @@ inner join region on nation.region_key = region.region_key
 
 ### <a id="monthly-sales-sql"></a>`monthly_sales.sql`
 
-[View gist](https://gist.github.com/paulandrewfield/d7a532d26e5a4df44fc66497d325975d)
-
 ```sql
 SELECT
    DATE_TRUNC('month', order_date) AS order_month,
@@ -205,8 +193,6 @@ ORDER BY
 ```
 
 ### <a id="monthly-sales-yml"></a>`monthly_sales.yml`
-
-[View gist](https://gist.github.com/paulandrewfield/e59d2fac190918dd7b39fb05e5537459)
 
 ```yaml
 models:
@@ -235,8 +221,6 @@ models:
 
 ### <a id="assert-net-item-sales-amount-positive-sql"></a>`assert_net_item_sales_amount_positive.sql`
 
-[View gist](https://gist.github.com/paulandrewfield/88713369e6c99fb06d12ab55c0857cb8)
-
 ```sql
 select
    order_key,
@@ -247,8 +231,6 @@ having not(amount >= 0)
 ```
 
 ### <a id="all-models-have-descriptions-sql"></a>`all_models_have_descriptions.sql`
-
-[View gist](https://gist.github.com/paulandrewfield/67e97a1c9fe360ad166385467a7fa913)
 
 ```sql
 select unique_id
@@ -261,8 +243,6 @@ where description = ''
 ## <a id="other"></a>Other
 
 ### <a id="customer-tier-sql"></a>`customer_tier.sql`
-
-[View gist](https://gist.github.com/paulandrewfield/51323b6b26b73505552656b68dbe333c)
 
 ```sql
 /* customer_tier // dmitri k // 2021/03/22 // #DA-417

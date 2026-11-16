@@ -47,7 +47,6 @@ for g in data:
     for f in g["files"]:
         lang = "yaml" if f["name"].endswith((".yml", ".yaml")) else "sql"
         md += [f'### <a id="{slug(f["name"])}"></a>`{f["name"]}`', "",
-               f"[View gist]({f['url']})", "",
                f"```{lang}", f["content"].rstrip("\n"), "```", ""]
     md += ["---", ""]
 open("code-snippets.md", "w").write("\n".join(md))
