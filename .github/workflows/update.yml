@@ -14,18 +14,18 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Rebuild index.html from gists
+      - name: Rebuild index.html and code-snippets.md from gists
         run: python3 build.py
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Commit if changed
         run: |
-          if git diff --quiet index.html; then
+          if git diff --quiet index.html code-snippets.md; then
             echo "No changes"
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add index.html
+            git add index.html code-snippets.md
             git commit -m "Refresh snippets from gists"
             git push
           fi
