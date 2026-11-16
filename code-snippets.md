@@ -1,13 +1,3 @@
-# Workshop Sign-Up URL
-
-Follow this link to sign up to the Workshop, and use the Workshop Name and Password listed below.
-
-[workshops.us1.dbt.com/workshop](https://workshops.us1.dbt.com/workshop)
-
-*Workshop Name:* Australia dbt Hands On Lab
-
-*Passcode:* 
-
 # HOL 2026 - Code Snippets
 
 Copy-and-paste snippets for the hands-on lab, collected from the gists in one place.
@@ -87,8 +77,8 @@ models:
 sources:
   - name: tpch
     description: "TPCH data source from Snowflake Sample Data"
-    database: tpch_now
-    schema: tpch
+    database: snowflake_sample_data
+    schema: tpch_sf1
     tables:
       - name: orders
         description: "One record per order"
