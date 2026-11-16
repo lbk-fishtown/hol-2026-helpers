@@ -83,8 +83,8 @@ models:
 sources:
   - name: tpch
     description: "TPCH data source from Snowflake Sample Data"
-    database: snowflake_sample_data
-    schema: tpch_sf1
+    database: tpch_now
+    schema: tpch
     tables:
       - name: orders
         description: "One record per order"
