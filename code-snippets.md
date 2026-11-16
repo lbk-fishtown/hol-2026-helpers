@@ -5,7 +5,8 @@ Follow this link to sign up to the Workshop, and use the Workshop Name and Passw
 [workshops.us1.dbt.com/workshop](https://workshops.us1.dbt.com/workshop)
 
 *Workshop Name:* Australia dbt Hands On Lab
-*Passcode:* au_hol_2026
+
+*Passcode:* 
 
 # HOL 2026 - Code Snippets
 
