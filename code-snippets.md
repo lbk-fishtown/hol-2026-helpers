@@ -1,3 +1,12 @@
+# Workshop Sign-up Link
+
+https://cloud.getdbt.com/coalesce-workshop-signup/?id=105
+
+**Workshop:** Australia dbt Hands On Lab
+
+**Passcode:** Will be displayed on the monitor.
+
+
 # HOL 2026 - Code Snippets
 
 Copy-and-paste snippets for the hands-on lab, collected from the gists in one place.
@@ -77,8 +86,8 @@ models:
 sources:
   - name: tpch
     description: "TPCH data source from Snowflake Sample Data"
-    database: snowflake_sample_data
-    schema: tpch_sf1
+    database: tpch_now
+    schema: tpch
     tables:
       - name: orders
         description: "One record per order"
