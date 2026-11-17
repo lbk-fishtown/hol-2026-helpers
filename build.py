@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Regenerate index.html from template.html using the current public gists of GITHUB_USER."""
-import json, os, urllib.request
+import json, os, sys, urllib.request
 
 USER = "paulandrewfield"
 GROUPS = [
@@ -32,22 +32,23 @@ js = json.dumps(data).replace("</", "<\\/")
 html = open("template.html").read().replace("/*DATA*/[]", js)
 open("index.html", "w").write(html)
 
-def slug(t):
-    return "".join(c if c.isalnum() else "-" for c in t.lower()).strip("-")
+if "--md" in sys.argv:  # markdown is only built on request; the workflow doesn't pass this
+    def slug(t):
+        return "".join(c if c.isalnum() else "-" for c in t.lower()).strip("-")
 
-md = ["# HOL 2026 - Code Snippets", "",
-      "Copy-and-paste snippets for the hands-on lab, collected from the gists in one place.", "",
-      "## Contents", ""]
-for g in data:
-    md.append(f"- [{g['group']}](#{slug(g['group'])})")
-    md += [f"  - [`{f['name']}`](#{slug(f['name'])})" for f in g["files"]]
-md += ["", "---", ""]
-for g in data:
-    md += [f'## <a id="{slug(g["group"])}"></a>{g["group"]}', ""]
-    for f in g["files"]:
-        lang = "yaml" if f["name"].endswith((".yml", ".yaml")) else "sql"
-        md += [f'### <a id="{slug(f["name"])}"></a>`{f["name"]}`', "",
-               f"```{lang}", f["content"].rstrip("\n"), "```", ""]
-    md += ["---", ""]
-open("code-snippets.md", "w").write("\n".join(md))
-print(f"Wrote index.html and code-snippets.md with {len(files)} files")
+    md = ["# HOL 2026 - Code Snippets", "",
+          "Copy-and-paste snippets for the hands-on lab, collected from the gists in one place.", "",
+          "## Contents", ""]
+    for g in data:
+        md.append(f"- [{g['group']}](#{slug(g['group'])})")
+        md += [f"  - [`{f['name']}`](#{slug(f['name'])})" for f in g["files"]]
+    md += ["", "---", ""]
+    for g in data:
+        md += [f'## <a id="{slug(g["group"])}"></a>{g["group"]}', ""]
+        for f in g["files"]:
+            lang = "yaml" if f["name"].endswith((".yml", ".yaml")) else "sql"
+            md += [f'### <a id="{slug(f["name"])}"></a>`{f["name"]}`', "",
+                   f"```{lang}", f["content"].rstrip("\n"), "```", ""]
+        md += ["---", ""]
+    open("code-snippets.md", "w").write("\n".join(md))
+print(f"Wrote index.html{' and code-snippets.md' if '--md' in sys.argv else ''} with {len(files)} files")
