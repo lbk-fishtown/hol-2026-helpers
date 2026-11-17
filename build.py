@@ -7,7 +7,8 @@ GROUPS = [
     ("Project setup", ["dbt_project.yml", "sources.yml"]),
     ("Staging models", ["stg_nations.sql", "stg_regions.sql"]),
     ("Marts", ["dim_customers.sql", "monthly_sales.sql", "monthly_sales.yml"]),
-    ("Tests", ["assert_net_item_sales_amount_positive.sql", "all_models_have_descriptions.sql"]),
+    ("Tests", ["assert_net_item_sales_amount_positive.sql"]),
+    ("Checks", ["all_models_have_descriptions.sql"]),
 ]
 FALLBACK_GROUP = "Other"  # any file not listed above lands here
 

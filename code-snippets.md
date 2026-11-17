@@ -25,6 +25,7 @@ Copy-and-paste snippets for the hands-on lab, collected from the gists in one pl
   - [`monthly_sales.yml`](#monthly-sales-yml)
 - [Tests](#tests)
   - [`assert_net_item_sales_amount_positive.sql`](#assert-net-item-sales-amount-positive-sql)
+- [Checks](#checks)
   - [`all_models_have_descriptions.sql`](#all-models-have-descriptions-sql)
 - [Other](#other)
   - [`customer_tier.sql`](#customer-tier-sql)
@@ -238,6 +239,10 @@ from {{ ref('fct_orders') }}
 group by 1
 having not(amount >= 0)
 ```
+
+---
+
+## <a id="checks"></a>Checks
 
 ### <a id="all-models-have-descriptions-sql"></a>`all_models_have_descriptions.sql`
 
