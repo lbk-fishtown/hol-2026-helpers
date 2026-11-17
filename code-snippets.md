@@ -7,6 +7,14 @@ https://cloud.getdbt.com/coalesce-workshop-signup/?id=105
 **Passcode:** Will be displayed on the monitor.
 
 
+# Useful Links
+https://github.com/dbt-labs/dbt-project-evaluator
+
+https://hub.getdbt.com/
+
+https://learn.getdbt.com/
+
+
 # HOL 2026 - Code Snippets
 
 Copy-and-paste snippets for the hands-on lab, collected from the gists in one place.
