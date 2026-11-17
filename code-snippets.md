@@ -14,6 +14,8 @@ https://hub.getdbt.com/
 
 https://learn.getdbt.com/
 
+https://docs.getdbt.com/
+
 
 # HOL 2026 - Code Snippets
 
